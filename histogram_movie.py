@@ -1,5 +1,6 @@
 import cv2
 from matplotlib import pyplot as plt
+import statistics
 
 #動画の読み込み
 capture = cv2.VideoCapture('image/sample30fps.mp4')
@@ -25,14 +26,20 @@ while True:
 
         plt.clf()
         for i, col in enumerate(color):
+
+           # histr_blue = cv2.calcHist([frame], [0], None, [256], [0, 255])
+           # histr_green = cv2.calcHist([frame], [1], None, [256], [0, 255])
+           # histr_red = cv2.calcHist([frame], [2], None, [256], [0, 255])
+
             #ヒストグラムを計算
             histr = cv2.calcHist([frame], [i], None, [256], [0, 255])
+        
             #ヒストグラムを描画
             plt.plot(histr, color=col)
 
         #x軸とy軸の範囲を指定
-        plt.xlim([0, 255])
-        plt.ylim([0, 20000])
+        plt.xlim([0, 255]), plt.xlabel('pixel_value')
+        plt.ylim([0, 20000]), plt.ylabel('number_of_pixels')
 
         #ヒストグラムを描画
         plt.pause(0.01)
