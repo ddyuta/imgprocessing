@@ -26,23 +26,21 @@ while True:
 
         plt.clf()
         for i, col in enumerate(color):
-
-           # histr_blue = cv2.calcHist([frame], [0], None, [256], [0, 255])
-           # histr_green = cv2.calcHist([frame], [1], None, [256], [0, 255])
-           # histr_red = cv2.calcHist([frame], [2], None, [256], [0, 255])
-
             #ヒストグラムを計算
             histr = cv2.calcHist([frame], [i], None, [256], [0, 255])
-        
             #ヒストグラムを描画
             plt.plot(histr, color=col)
 
+
         #x軸とy軸の範囲を指定
         plt.xlim([0, 255]), plt.xlabel('pixel_value')
-        plt.ylim([0, 20000]), plt.ylabel('number_of_pixels')
+        plt.ylim([0, 20000]), plt.ylabel('pixel_of_number')
 
         #ヒストグラムを描画
         plt.pause(0.01)
+
+        #print(statistics.median(frame.ravel()))
+        #print(statistics.mean(frame.ravel()))
 
         #’ｑ’を押したときにbreak
         #この書き込みがないと映像が表示されない
